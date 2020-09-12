@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Covid19Tester.Models.Person>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Find test by CPR number</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<p>
+    <!--
+     <div class="form-group">
+         <input type="submit" value="Search" class="btn btn-primary" />
+         <input type="text"/>
+     </div>
+    -->
+    @using (Html.BeginForm("Index", "Person", FormMethod.Get))
+    {
+        @Html.TextBox("searchString", "", new {placeholder="cpr (ex: 2805980101)"})<input type="submit" value="Search" />
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <!--
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            -->
+            <th>
+                @Html.DisplayNameFor(model => model.CprNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestResultat)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <!--
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            -->
+            <td>
+                @Html.DisplayFor(modelItem => item.CprNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TestResultat)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id, cprNumber = item.CprNumber }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id, cprNumber = item.CprNumber }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id, cprNumber = item.CprNumber })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
